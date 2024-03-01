@@ -1,4 +1,4 @@
-package homeworks
+package homeworks.hw1
 
 /*
 Написать программу, которая обрабатывает введённые пользователем в консоль команды:
@@ -31,7 +31,9 @@ add <Имя> email <Адрес электронной почты>
         
     """.trimIndent())
         command = readlnOrNull()
-        if (command == "help")
+        if (command == "exit")
+            println("Всего доброго...")
+        else if (command == "help")
             println("Никто тебе не поможет :-(\n")
         else if ((command != null) && command.contains("add"))
             println("${parseAdd(command)}\n")
