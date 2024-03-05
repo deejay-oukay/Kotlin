@@ -37,7 +37,7 @@ fun main() {
             Help().run()
         else
             when(test){
-                
+                !
             }
     } while (test !is Exit)
 }
