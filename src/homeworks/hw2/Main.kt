@@ -20,25 +20,34 @@ package homeworks.hw2
 //  Если isValid для команды возвращает false, выводим help. Если true, обрабатываем команду внутри when.
 
 fun readCommand(command: String?): Command {
-    when(command) {
-        "exit" -> return Exit()
-        "help" -> return Help()
-        "show" -> return Show()
-        else -> return if (command?.contains("add") == true)
-            Add(command)
-        else Error()
+    return when(command) {
+        "exit" -> Exit()
+        "help" -> Help()
+        "show" -> Show()
+        else -> {
+            if ((command !== null) && command.contains("add")) {
+                Add(command)
+            } else {
+                Help()
+            }
+        }
     }
 }
 
 fun main() {
     do {
+        val command = readlnOrNull()
         val test = readCommand(readlnOrNull())
-        if (test == false)
-            Help().run()
-        else
+        println(test)
+        if ((null != command) && test.isValid()) {
             when(test){
-                !
+                is Help -> Help().run()
+                is Add -> Add(command).run()
+                is Show -> Show().run()
+                else -> Exit().run()
             }
+        } else
+            Help().run()
     } while (test !is Exit)
 }
 
