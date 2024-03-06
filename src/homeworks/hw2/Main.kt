@@ -1,4 +1,5 @@
 package homeworks.hw2
+import kotlin.reflect.*
 
 //За основу берём код решения домашнего задания из предыдущего семинара и дорабатываем его.
 //
@@ -21,9 +22,9 @@ package homeworks.hw2
 
 fun readCommand(command: String?): Command {
     return when(command) {
-        "exit" -> Exit()
         "help" -> Help()
         "show" -> Show()
+        "exit" -> Exit()
         else -> {
             if ((command !== null) && command.contains("add")) {
                 Add(command)
@@ -35,9 +36,10 @@ fun readCommand(command: String?): Command {
 }
 
 fun main() {
+    Help().run()
     do {
         val command = readlnOrNull()
-        val test = readCommand(readlnOrNull())
+        val test = readCommand(command)
         println(test)
         if ((null != command) && test.isValid()) {
             when(test){

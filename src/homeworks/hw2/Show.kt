@@ -1,13 +1,12 @@
 package homeworks.hw2
+import kotlin.reflect.*
 
-class Show(): Command {
+class Show: Command {
     override fun isValid(): Boolean {
         return true
     }
 
     fun run() {
-        fun run(person: Person) {
-            println(person.lastCommand)
-        }
+        println(Person::last.toString())
     }
 }
