@@ -4,7 +4,7 @@ class Add(command: String): Command {
     private var parts = command.split(" ").toTypedArray()
     override fun isValid(): Boolean {
         if (parts.isEmpty() || (parts.size != 4)){
-            println("Недопустимое количество параметров к команде add")
+            println("Недопустимое количество параметров (${parts.size}) к команде add")
             return false
         }
         when(parts[2])

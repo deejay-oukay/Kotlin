@@ -1,5 +1,4 @@
 package homeworks.hw3
-import kotlin.reflect.*
 
 class Find(command: String): Command {
     private var parts = command.split(" ").toTypedArray()

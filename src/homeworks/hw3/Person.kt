@@ -1,5 +1,4 @@
 package homeworks.hw3
-import kotlin.reflect.*
 
 data class Person (
     var name: String
