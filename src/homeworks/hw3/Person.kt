@@ -3,19 +3,20 @@ package homeworks.hw3
 data class Person (
     var name: String
 ) {
-    lateinit var phones: Set<String>
-    lateinit var emails: Set<String>
+    var phones = mutableSetOf<String>()
+    var emails = mutableSetOf<String>()
 
     fun addPhone(phone: String) {
-        phones += phone
+        phones.add(phone)
+        println("Данные персоны после добавления телефона: "+toString())
     }
     fun addEmail(email: String) {
-        emails += email
+        emails.add(email)
+        println("Данные персоны после добавления почты: "+toString())
     }
 
     override fun toString(): String {
         return "Person(name='$name', phones=$phones, emails=$emails)"
     }
-
-
 }
+

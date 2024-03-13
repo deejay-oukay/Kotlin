@@ -17,6 +17,10 @@ fun readCommand(command: String): Command {
         else -> {
             if (command.contains("add")) {
                 Add(command)
+            } else if (command.contains("show")) {
+                Show(command)
+            } else if (command.contains("find")) {
+                Find(command)
             } else {
                 Help()
             }
@@ -26,6 +30,7 @@ fun readCommand(command: String): Command {
 
 fun main() {
     Help().run()
+
     do {
         val command = readln()
         val test = readCommand(command)

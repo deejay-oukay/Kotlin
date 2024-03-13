@@ -11,8 +11,8 @@ class Show(command: String): Command {
     }
 
     fun run() {
-        val person = Book().getByName(parts[1])
+        val person: Person? = Book().getByName(parts[1])
         if (person != null)
-            println(person.toString())
+            println(person)
     }
 }

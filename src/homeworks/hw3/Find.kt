@@ -11,8 +11,8 @@ class Find(command: String): Command {
     }
 
     fun run() {
-        val persons = Book().findByPhoneOrEmail(parts[1])
+        val persons = (Book().findByPhoneOrEmail(parts[1]))
         for (person in persons)
-            println(person.toString())
+            println(person)
     }
 }

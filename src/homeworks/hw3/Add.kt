@@ -21,8 +21,8 @@ class Add(command: String): Command {
     fun run(){
         when(parts[2])
         {
-            "phone" -> Book().addPhone(Book().addName(parts[1]),parts[3])
-            "email" -> Book().addEmail(Book().addName(parts[1]),parts[3])
+            "phone" -> Book().addPhoneToName(parts[3],parts[1])
+            "email" -> Book().addEmailToName(parts[3],parts[1])
         }
     }
 }

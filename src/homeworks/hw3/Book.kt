@@ -1,43 +1,61 @@
 package homeworks.hw3
 
 class Book {
-    private lateinit var persons: Set<Person>
+    private var persons = mutableSetOf<Person>()
 
-    //Возвращает персону, которой нужно добавить другие данные
-    fun addName(name: String): Person {
-        if (persons.isNotEmpty())
+    fun addPhoneToName(phone: String, name: String) {
+        println("Пытаюсь добавить телефон $phone для $name")
+        var person = getByName(name)
+        if (person == null)
         {
-            val person = getByName(name)
-            if (person != null)
-            {
-                println("Имя $name найдено")
-                return(person)
-            }
+            person = Person(name)
+            println("Данные только что созданной персоны: $person")
+            persons.add(person)
         }
-        println("Имя $name НЕ найдено")
-        val newPerson = Person(name)
-        this.persons = this.persons.plus(newPerson)
-        return newPerson
-    }
-    fun addPhone(person: Person, phone: String) {
-        println("Пытаюсь добавить телефон $phone")
+        println("Список персон перед добавлением телефона: "+list())
         person.addPhone(phone)
+        println("Список персон после добавления телефона: "+list())
     }
-    fun addEmail(person: Person, email: String) {
-        println("Пытаюсь добавить email $email")
+    fun addEmailToName(email: String, name: String) {
+        var person = getByName(name)
+        if (person == null)
+        {
+            person = Person(name)
+            println("Данные только что созданной персоны: $person")
+            persons.add(person)
+        }
+        println("Список персон перед добавлением почты: "+list())
         person.addEmail(email)
+        println("Список персон после добавления почты: "+list())
     }
 
     fun getByName(name: String): Person? {
         println("Пытаюсь найти по имени $name")
         if (persons.isNotEmpty())
+        {
             for (person in persons)
                 if (person.name == name)
                     return(person)
+            println("Не найдено")
+        }
+        else
+            println("Список пока пустой")
         return null
     }
 
-    fun findByPhoneOrEmail(data: String): List<Person> {
-        return persons.filter { it.phones.contains(data) || it.emails.contains(data) }
+    fun findByPhoneOrEmail(data: String): MutableSet<out Any> {
+        println("Пытаюсь найти телефон или почту $data")
+        if (persons.isNotEmpty())
+            return mutableSetOf(persons.filter { it.phones.contains(data) || it.emails.contains(data) })
+        else
+            println("Список пока пустой")
+        return mutableSetOf<Person>()
+    }
+
+    private fun list(): String {
+        var result = ""
+        for (person in persons)
+            result += "\n$person"
+        return "$result\n"
     }
 }
