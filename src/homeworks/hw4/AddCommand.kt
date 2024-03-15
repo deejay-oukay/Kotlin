@@ -16,8 +16,8 @@ class AddCommand: Command {
     }
     private inner class Parser {
         val argsForValidate = hashSetOf< Triple<String, Exception, (String) -> Boolean> > (
-            Triple("phone", PhoneNumberValidateErrorException(Validator.PHONE_NUMBER_ERROR)) { Validator.isPhoneNumberValid(it) },
-            Triple("email", EmailValidateErrorException(Validator.EMAIL_ERROR)) { Validator.isEmailValid(it) }
+            Triple("phone", Exception("Некорректный номер телефона")) { Validator.isPhoneNumberValid(it) },
+            Triple("email", Exception("Некорректный адрес почты")) { Validator.isEmailValid(it) }
         )
 
         fun parse(data: String) {
@@ -25,11 +25,11 @@ class AddCommand: Command {
             val items = data.trim().split(" ")
 
             if (items.isEmpty() || items.size > argsForValidate.size + 3)
-                throw ArgumentErrorException(Command.ARGUMENT_ERROR)
+                throw Exception("Некорретное количество элементов при добавлении данных")
             if (argsForValidate.any { it.first == items[0] })
                 throw ArgumentErrorException(Command.ARGUMENT_ERROR)
             if (items.first().isEmpty())
-                throw ArgumentErrorException(Command.ARGUMENT_ERROR)
+                throw Exception("Имя не указано")
             if(items.drop(1).count() % 2 != 0)
                 throw ArgumentErrorException(Command.ARGUMENT_ERROR)
             args["name"] = items.first()
@@ -47,17 +47,12 @@ class AddCommand: Command {
         }
     }
     override fun execute(data: String?) {
-        if(data.isNullOrEmpty() || data.trim().isEmpty())
-        {
-            HelpCommand().execute("Некорректные данные для добавления")
-            return
-        }
         if(args.isEmpty())
-            parser.parse(data)
+            parser.parse(data.toString())
         with(
             Person.EntryBuilder()
-                .name(args["name"] ?: throw ArgumentErrorException(Command.ARGUMENT_ERROR))
-                .phoneNumber(args["phone"] ?: "")
+                .name(args["name"] ?: throw Exception("Некорректное имя"))
+                .phone(args["phone"] ?: "")
                 .email(args["email"] ?: "")
                 .build()
         ) {
@@ -65,7 +60,7 @@ class AddCommand: Command {
                 Command.contacts.update(this)
             else
                 Command.contacts.add(this)
-            println("Успешно: "+Command.contacts.findPersonByName(this.name).toString())
+            println("Результат: "+Command.contacts.findPersonByName(this.name).toString())
         }
     }
 

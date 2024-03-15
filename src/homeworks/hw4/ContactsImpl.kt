@@ -11,7 +11,7 @@ class ContactsImpl: Contacts {
     override fun update(person: Person) {
         findPersonByName(person.name)?.let{
             it.email.addAll(person.email)
-            it.phoneNumber.addAll(person.phoneNumber)
+            it.phone.addAll(person.phone)
         }
     }
 
@@ -19,5 +19,5 @@ class ContactsImpl: Contacts {
 
     override fun findPeopleByEmail(email: String) = people.filter { it.email.contains(email) }.toHashSet()
 
-    override fun findPeopleByPhone(phone: String) = people.filter { it.phoneNumber.contains(phone) }.toHashSet()
+    override fun findPeopleByPhone(phone: String) = people.filter { it.phone.contains(phone) }.toHashSet()
 }

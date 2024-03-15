@@ -41,6 +41,10 @@ fun main() {
             if (!first.isValid(second))
                 HelpCommand().execute("Команда введена некорректно")
             else
-                first.execute(second)
+                try {
+                    first.execute(second)
+                } catch (e: Exception) {
+                    HelpCommand().execute(e.message)
+                }
         }
 }

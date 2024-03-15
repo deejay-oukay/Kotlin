@@ -5,10 +5,11 @@ class ShowCommand: Command {
         const val PERSON_NOT_FOUND = "Person not found"
     }
     override fun execute(name: String?) {
-        if(name.isNullOrEmpty() || name.trim().isEmpty()) throw ArgumentErrorException(Command.ARGUMENT_ERROR)
+        if(name.isNullOrEmpty() || name.trim().isEmpty())
+            throw ArgumentErrorException(Command.ARGUMENT_ERROR)
 
         with (Command.contacts.findPersonByName(name.trim())) {
-            println(this?.toString() ?: PERSON_NOT_FOUND)
+            println(this?.toString() ?: "Не найдено")
         }
     }
 

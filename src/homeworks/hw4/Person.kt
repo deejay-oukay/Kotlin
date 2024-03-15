@@ -1,9 +1,9 @@
 package homeworks.hw4
 
-data class Person(val name: String, val phoneNumber: HashSet<String>, val email: HashSet<String>) {
+data class Person(val name: String, val phone: HashSet<String>, val email: HashSet<String>) {
     class EntryBuilder {
         private var name: String = ""
-        private var phoneNumber: HashSet<String> = hashSetOf()
+        private var phone: HashSet<String> = hashSetOf()
         private var email: HashSet<String> = hashSetOf()
 
         fun name(name: String): EntryBuilder {
@@ -11,16 +11,16 @@ data class Person(val name: String, val phoneNumber: HashSet<String>, val email:
             return this
         }
 
-        fun phoneNumber(phoneNumber: String): EntryBuilder {
-            if(!phoneNumber.isNullOrEmpty()) this.phoneNumber.add(phoneNumber)
+        fun phone(phone: String): EntryBuilder {
+            if(phone.isNotEmpty()) this.phone.add(phone)
             return this
         }
 
         fun email(email: String): EntryBuilder {
-            if(!email.isNullOrEmpty()) this.email.add(email)
+            if(email.isNotEmpty()) this.email.add(email)
             return this
         }
 
-        fun build() = Person(name = name, phoneNumber = phoneNumber, email = email)
+        fun build() = Person(name = name, phone = phone, email = email)
     }
 }
