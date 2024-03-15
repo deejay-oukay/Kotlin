@@ -21,6 +21,7 @@ FileOutputStream(file).use {it.write(text.toByteArray(Charsets.UTF_8))}
 fun main() {
     val console: UserInterface = Console()
     val commandParser: CommandParser = CommandParserImpl()
+    HelpCommand().execute()
     while (true) {
         try {
             commandParser.readCommand(console.input()).run {
@@ -31,6 +32,7 @@ fun main() {
             continue
         } catch (e: CommandErrorException) {
             println(e.message)
+            HelpCommand().execute()
             continue
         } catch (e: FieldValidateErrorException) {
             println(e.message)

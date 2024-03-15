@@ -1,10 +1,11 @@
 package homeworks.hw4
 
+import kotlin.system.exitProcess
+
 class ExitCommand: Command {
     override fun isValid(args: String?) = args.isNullOrEmpty()
-
-    companion object {
-        const val EXIT_MESSAGE = "Application closed"
+    override fun execute(data: String?) {
+        println("Всего доброго...")
+        exitProcess(-1)
     }
-    override fun execute(data: String?) = throw ExitException(EXIT_MESSAGE)
 }
