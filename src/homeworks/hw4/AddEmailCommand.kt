@@ -12,7 +12,7 @@ class AddEmailCommand: Command {
                 .build()
         }.also {
             if(Command.contacts.isPersonExists(it)) Command.contacts.update(it) else Command.contacts.add(it)
-            Console().output(Command.contacts.findPersonByName(it.name).toString())
+            println(Command.contacts.findPersonByName(it.name).toString())
         }
     }
 

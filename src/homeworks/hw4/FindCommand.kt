@@ -15,13 +15,13 @@ class FindCommand: Command {
         if(data.isNullOrEmpty() || data.trim().isEmpty()) throw ArgumentErrorException(Command.ARGUMENT_ERROR)
         parser.getCommand(data).also {
             if (it == null) {
-                Console().output(NOTHING_FOUND)
+                println(NOTHING_FOUND)
                 return
             }
 
             val (executor, value) = it
             val people = executor(value)
-            Console().output(if(people.isNotEmpty()) people.toString() else NOTHING_FOUND)
+            println(if(people.isNotEmpty()) people.toString() else NOTHING_FOUND)
         }
     }
 

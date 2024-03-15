@@ -8,7 +8,7 @@ class ShowCommand: Command {
         if(name.isNullOrEmpty() || name.trim().isEmpty()) throw ArgumentErrorException(Command.ARGUMENT_ERROR)
 
         with (Command.contacts.findPersonByName(name.trim())) {
-            Console().output(this?.toString() ?: PERSON_NOT_FOUND)
+            println(this?.toString() ?: PERSON_NOT_FOUND)
         }
     }
 

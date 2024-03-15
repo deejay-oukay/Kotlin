@@ -18,31 +18,29 @@ File(""/Users/user/file.txt"").writeText(""Text to write"")
 FileOutputStream(file).use {it.write(text.toByteArray(Charsets.UTF_8))}
 */
 
-fun main() {
-    val console: UserInterface = Console()
-    val commandParser: CommandParser = CommandParserImpl()
-    HelpCommand().execute()
-    while (true) {
-        try {
-            commandParser.readCommand(console.input()).run {
-                if(!first.isValid(second)) HelpCommand().execute(first::class.simpleName) else first.execute(second)
-            }
-        } catch (e: ArgumentErrorException) {
-            println(e.message)
-            continue
-        } catch (e: CommandErrorException) {
-            println(e.message)
-            HelpCommand().execute()
-            continue
-        } catch (e: FieldValidateErrorException) {
-            println(e.message)
-            continue
-        } catch (e: NoPersonException) {
-            println(e.message)
-            continue
-        } catch (e: ExitException) {
-            println(e.message)
-            break
-        }
+fun readCommand(data: String?): Pair<Command, String?>? {
+    if (data.isNullOrEmpty() || data.trim().isEmpty()) {
+        HelpCommand().execute()
+        return null
     }
+    val items = data.split(" ")
+    val args = items.subList(1, items.size).joinToString(" ")
+
+    return Pair(when (items.first()) {
+        "add" -> AddCommand()
+        "show" -> ShowCommand()
+        "find" -> FindCommand()
+        "exit" -> ExitCommand()
+        else -> HelpCommand()
+    },args)
+}
+fun main() {
+    HelpCommand().execute()
+    while (true)
+        readCommand(readlnOrNull())?.run {
+            if (!first.isValid(second))
+                HelpCommand().execute("Команда введена некорректно")
+            else
+                first.execute(second)
+        }
 }

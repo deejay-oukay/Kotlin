@@ -2,9 +2,10 @@ package homeworks.hw4
 
 class HelpCommand: Command {
     override fun isValid(args: String?) = true
-
     override fun execute(data: String?) {
-        Console().output("""Введите одну из команд:
+        if (data != null)
+            println(data)
+        println("""Введите одну из команд:
 help - Помощь
 add <Имя> phone <Номер телефона> - добавить телефон к имени
 add <Имя> email <Адрес электронной почты> - добавить email к имени
