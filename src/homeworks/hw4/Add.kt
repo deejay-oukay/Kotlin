@@ -1,6 +1,6 @@
 package homeworks.hw4
 
-class AddCommand: Command {
+class Add: Command {
     private var args = HashMap<String, String>()
     private val parser = Parser()
 
@@ -16,8 +16,8 @@ class AddCommand: Command {
     }
     private inner class Parser {
         val argsForValidate = hashSetOf< Triple<String, Exception, (String) -> Boolean> > (
-            Triple("phone", Exception("Некорректный номер телефона")) { Validator.isPhoneNumberValid(it) },
-            Triple("email", Exception("Некорректный адрес почты")) { Validator.isEmailValid(it) }
+            Triple("phone", Exception("Некорректный номер телефона")) { isPhoneValid(it) },
+            Triple("email", Exception("Некорректный адрес почты")) { isEmailValid(it) }
         )
 
         fun parse(data: String) {
@@ -64,5 +64,8 @@ class AddCommand: Command {
         }
     }
 
+    fun isPhoneValid(phone: String) = phone.matches(Regex("""[+]?\d+"""))
+
+    fun isEmailValid(email: String) = email.matches(Regex("""[a-zA-Z]+@[a-zA-Z]+.[a-zA-Z]+"""))
 
 }

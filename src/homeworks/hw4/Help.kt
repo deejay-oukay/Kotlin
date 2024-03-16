@@ -1,6 +1,6 @@
 package homeworks.hw4
 
-class HelpCommand: Command {
+class Help: Command {
     override fun isValid(args: String?) = true
     override fun execute(data: String?) {
         if (data != null)

@@ -2,7 +2,7 @@ package homeworks.hw4
 
 sealed interface Command {
     companion object {
-        val contacts: Contacts = ContactsImpl()
+        val contacts: Book = Book()
         const val ARGUMENT_ERROR = "Argument error"
     }
 

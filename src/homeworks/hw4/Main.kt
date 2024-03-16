@@ -20,31 +20,31 @@ FileOutputStream(file).use {it.write(text.toByteArray(Charsets.UTF_8))}
 
 fun readCommand(data: String?): Pair<Command, String?>? {
     if (data.isNullOrEmpty() || data.trim().isEmpty()) {
-        HelpCommand().execute()
+        Help().execute()
         return null
     }
     val items = data.split(" ")
     val args = items.subList(1, items.size).joinToString(" ")
 
     return Pair(when (items.first()) {
-        "add" -> AddCommand()
-        "show" -> ShowCommand()
-        "find" -> FindCommand()
-        "exit" -> ExitCommand()
-        else -> HelpCommand()
+        "add" -> Add()
+        "show" -> Show()
+        "find" -> Find()
+        "exit" -> Exit()
+        else -> Help()
     },args)
 }
 fun main() {
-    HelpCommand().execute()
+    Help().execute()
     while (true)
         readCommand(readlnOrNull())?.run {
             if (!first.isValid(second))
-                HelpCommand().execute("Команда введена некорректно")
+                Help().execute("Команда введена некорректно")
             else
                 try {
                     first.execute(second)
                 } catch (e: Exception) {
-                    HelpCommand().execute(e.message)
+                    Help().execute(e.message)
                 }
         }
 }
