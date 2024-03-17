@@ -17,4 +17,8 @@ class Book {
     fun isPersonExists(person: Person) = findPersonByName(person.name) != null
 
     fun findPeopleByPhoneOrEmail(data: String) = persons.filter { it.phone.contains(data) || it.email.contains(data)}.toHashSet()
+
+    fun findAll() = persons.map { it.value }.toHashSet()
+
+    fun isEmpty() = persons.isEmpty()
 }

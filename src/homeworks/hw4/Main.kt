@@ -29,6 +29,7 @@ fun readCommand(data: String?): Pair<Command, String?>? {
         "add" -> Add()
         "show" -> Show()
         "find" -> Find()
+        "export" -> Export()
         "exit" -> Exit()
         else -> Help()
     },args)
