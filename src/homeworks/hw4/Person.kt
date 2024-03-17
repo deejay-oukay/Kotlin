@@ -21,6 +21,6 @@ data class Person(val name: String, val phone: HashSet<String>, val email: HashS
             return this
         }
 
-        fun build() = Person(name = name, phone = phone, email = email)
+        fun build() = Person(name, phone, email)
     }
 }

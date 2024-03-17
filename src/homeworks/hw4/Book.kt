@@ -1,7 +1,6 @@
 package homeworks.hw4
 
 class Book {
-
     private val persons = hashSetOf<Person>()
 
     fun add(person: Person) = persons.add(person)
@@ -15,7 +14,7 @@ class Book {
         }
     }
 
-    fun isPersonExists(person: Person)= findPersonByName(person.name) != null
+    fun isPersonExists(person: Person) = findPersonByName(person.name) != null
 
     fun findPeopleByPhoneOrEmail(data: String) = persons.filter { it.phone.contains(data) || it.email.contains(data)}.toHashSet()
 }

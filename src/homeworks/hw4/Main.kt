@@ -25,7 +25,6 @@ fun readCommand(data: String?): Pair<Command, String?>? {
     }
     val items = data.split(" ")
     val args = items.subList(1, items.size).joinToString(" ")
-
     return Pair(when (items.first()) {
         "add" -> Add()
         "show" -> Show()
@@ -41,10 +40,6 @@ fun main() {
             if (!first.isValid(second))
                 Help().execute("Команда введена некорректно")
             else
-                try {
-                    first.execute(second)
-                } catch (e: Exception) {
-                    Help().execute(e.message)
-                }
+                first.execute(second)
         }
 }
