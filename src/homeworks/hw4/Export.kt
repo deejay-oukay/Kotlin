@@ -27,8 +27,8 @@ class Export: Command {
             Command.contacts.findAll().forEach {
                 jsonObj {
                     p("name" to it.name)
-                    p("phones" to it.phones)
-                    p("emails" to it.emails)
+                    jsonList { "phones" to p("phones" to it.phone).toString() }
+                    jsonList { "emails" to p("emails" to it.email).toString() }
                 }
             }
         }
@@ -68,6 +68,5 @@ class JsonObject {
 }
 
 object FileUtils {
-    @JvmStatic
     fun writeText(file: String, text: String) = File(file).writeText(text)
 }
